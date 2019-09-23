@@ -22,7 +22,7 @@ public class PublicTests {
 
     @Test(expected=IllegalArgumentException.class)
     public void test3_create_invalidSeq() {
-        DNA dna3 = new DNA("-TA");
+        DNA dna3 = new DNA("TAGGATTA");
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PublicTests {
 
     @Test
     public void test5_codonSet() {
-        DNA dna5 = new DNA("AAAGGTTACTGA");
+        DNA dna5 = new DNA("AAAAAAGGTGGTTACTGA");
         HashSet<String> expectedSet = new HashSet<>();
         expectedSet.add("AAA");
         expectedSet.add("GGT");
@@ -41,6 +41,7 @@ public class PublicTests {
         expectedSet.add("TGA");
         assertEquals(expectedSet, dna5.codonSet());
     }
+
 
     @Test
     public void test6_getSequence() {
@@ -58,7 +59,7 @@ public class PublicTests {
     @Test
     public void test8_mutate() {
         DNA dna7 = new DNA("AAAGGTTACTG+A");
-        dna7.mutateCodon("TGA", "G+T");
+        dna7.mutateCodon("T+A", "GAT");
         assertEquals("AAAGGTTACTG+A", dna7.sequence());
     }
 
@@ -69,4 +70,5 @@ public class PublicTests {
         assertEquals(1978.8, dna9.totalMass(), 0.001);
         assertEquals("ATGCCAATCTGGTAG", dna9.sequence());
     }
+
 }

@@ -1,28 +1,26 @@
 package exercise5;
 
 import org.junit.Test;
-
 import java.util.HashSet;
-
 import static org.junit.Assert.*;
 
-public class PublicTests {
+public class GradingTests {
 
     @Test
     public void test1_create_getMass() {
-        DNA dna1 = new DNA("ATGCCAxCTATGGTAG");
-        assertEquals(2078.8, dna1.totalMass(), 0.001);
+        DNA dna1 = new DNA("xATGCCAxCTATGGTAG");
+        assertEquals(2178.8, dna1.totalMass(), 0.001);
     }
 
     @Test
     public void test2_create_checkProtein() {
-        DNA dna2 = new DNA("ATGCCAACATGGATGCCCGATAT++GGATTG+A!");
+        DNA dna2 = new DNA("ATGCCAACATGGATGCCCGATAT++GGATTG+xA!");
         assertTrue(dna2.isProtein());
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void test3_create_invalidSeq() {
-        DNA dna3 = new DNA("TAGGATTA");
+        DNA dna3 = new DNA("BB-T?A");
     }
 
     @Test
@@ -33,7 +31,7 @@ public class PublicTests {
 
     @Test
     public void test5_codonSet() {
-        DNA dna5 = new DNA("AAAAAAGGTGGTTACTGA");
+        DNA dna5 = new DNA("AAAGGTTACTGAAAA");
         HashSet<String> expectedSet = new HashSet<>();
         expectedSet.add("AAA");
         expectedSet.add("GGT");
@@ -42,11 +40,10 @@ public class PublicTests {
         assertEquals(expectedSet, dna5.codonSet());
     }
 
-
     @Test
     public void test6_getSequence() {
-        DNA dna6 = new DNA("AAAGGTTACTGA");
-        assertEquals("AAAGGTTACTGA", dna6.sequence());
+        DNA dna6 = new DNA("AXTTAAAGGTTACTGA");
+        assertEquals("AXTTAAAGGTTACTGA", dna6.sequence());
     }
 
     @Test
@@ -59,16 +56,15 @@ public class PublicTests {
     @Test
     public void test8_mutate() {
         DNA dna7 = new DNA("AAAGGTTACTG+A");
-        dna7.mutateCodon("T+A", "GAT");
+        dna7.mutateCodon("TGA", "G+T");
         assertEquals("AAAGGTTACTG+A", dna7.sequence());
     }
 
     @Test
     public void test9_mutate() {
         DNA dna9 = new DNA("ATGCCAxCTATGGTAG");
-        dna9.mutateCodon("CTA", "ATC");
-        assertEquals(1978.8, dna9.totalMass(), 0.001);
-        assertEquals("ATGCCAATCTGGTAG", dna9.sequence());
+        dna9.mutateCodon("CTA", "ACC");
+        assertEquals(1964.8, dna9.totalMass(), 0.001);
+        assertEquals("ATGCCAACCTGGTAG", dna9.sequence());
     }
-
 }
